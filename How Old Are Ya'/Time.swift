@@ -7,3 +7,23 @@
 //
 
 import Foundation
+
+struct Time {
+    
+    var seconds: Double = 0.0
+    
+    var minutes: Double {
+        
+        get {
+            return seconds / 60.0
+        }
+        set {
+            self.seconds = newValue * 60.0
+        }
+    }
+    
+    init(seconds: Double) {
+        self.seconds = seconds
+    }
+    
+}
