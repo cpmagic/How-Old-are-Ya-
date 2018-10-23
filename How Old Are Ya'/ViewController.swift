@@ -15,13 +15,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     @IBAction func btnCalculateHandler(_ sender: UIButton) {
         //1 - get selected date from date picker
         let birthDate = self.datePicker.date
-        //let birthHour = 12
         
         //2 - get today date
         let today = Date()

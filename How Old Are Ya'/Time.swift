@@ -11,7 +11,7 @@ import Foundation
 struct Time {
     
     var seconds: Double = 0.0
-    
+
     var minutes: Double {
         
         get {
