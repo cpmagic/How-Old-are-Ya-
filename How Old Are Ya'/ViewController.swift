@@ -8,17 +8,27 @@
 
 import UIKit
 
+let today = Date()
+let calendar = Calendar.current
+let year = calendar.component(.year, from: today)
+let month = calendar.component(.month, from: today)
+let day = calendar.component(.day, from: today)
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var lblCurrentDate: UILabel!
     @IBOutlet weak var lblBirthDate: UILabel!
     @IBOutlet weak var lblAge: UILabel!
+    @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    let today = Date()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        lblBirthDate.text = ""
+        lblAge.text = ""
+        lblReset.isHidden = true
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
         lblAge.adjustsFontSizeToFitWidth = true
@@ -35,6 +45,7 @@ class ViewController: UIViewController {
         dateformatter.timeStyle = DateFormatter.Style.none
         let dateValue = dateformatter.string(from: datePicker.date)
         lblBirthDate.text = "Your Birth Date: \(dateValue)"
+        lblReset.isHidden = false
         calculateBirthday()
     }
     func calculateBirthday() {
@@ -43,7 +54,6 @@ class ViewController: UIViewController {
         var txtDay = ""
         //1 - get selected date from date picker
         let birthDate = self.datePicker.date
-
         //2 Set Alert
         if birthDate >= today
         {
@@ -61,40 +71,31 @@ class ViewController: UIViewController {
         let ageMonths = components.month
         let ageDays = components.day
         //5 - display age in label
-        
         if ageYears == 1 {
             txtYear = "Year"
-            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
         }
         else {
             txtYear = "Years"
-            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
         }
         if ageMonths == 1 {
             txtMonth = "Month"
-            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
         }
         else {
             txtMonth = "Months"
-            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
         }
         if ageDays == 1 {
             txtDay = "Day"
-            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
         }
         else {
             txtDay = "Days"
-            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
         }
         self.lblAge.text = "You are \(ageYears!) \(txtYear), \(ageMonths!) \(txtMonth), \(ageDays!) \(txtDay) Old"
-        
-
-        //        var time = Time(seconds: 150.0)
-        //        print("seconds: \(time.seconds)")
-        //        print("minutes: \(time.minutes)")
-        //
-        //        time.minutes = 5
-        //        print("seconds: \(time.seconds)")
+    }
+    @IBAction func btnReset(_ sender: UIButton) {
+        datePicker.date = today;
+        lblBirthDate.text = ""
+        lblAge.text = ""
+        lblReset.isHidden = true
     }
 }
 

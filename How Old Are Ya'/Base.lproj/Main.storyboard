@@ -63,14 +63,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select your birth date:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nne-NA-Ggl">
-                                <rect key="frame" x="0.0" y="467" width="375" height="25"/>
+                                <rect key="frame" x="0.0" y="472" width="375" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="hgo-AP-9ec"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhO-T2-WHK">
+                                <rect key="frame" x="154" y="163" width="67" height="25"/>
+                                <color key="backgroundColor" red="0.15686274510000001" green="0.66666666669999997" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="p3C-At-uns"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <state key="normal" title=" Reset ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SbO-d3-OoQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -78,8 +92,10 @@
                             <constraint firstItem="UNa-px-q30" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IEZ-fc-E4Q"/>
                             <constraint firstItem="Nne-NA-Ggl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="McO-ea-wmK"/>
                             <constraint firstItem="Nne-NA-Ggl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Pj5-aB-bg8"/>
+                            <constraint firstItem="RhO-T2-WHK" firstAttribute="top" secondItem="sz3-zO-tgY" secondAttribute="bottom" constant="10" id="RbQ-9F-8yx"/>
                             <constraint firstItem="STi-O4-TIt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TEv-B5-H2q"/>
                             <constraint firstItem="sz3-zO-tgY" firstAttribute="top" secondItem="1Qm-l8-KQS" secondAttribute="bottom" constant="5" id="TXC-nl-fxU"/>
+                            <constraint firstItem="RhO-T2-WHK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VtZ-He-PT7"/>
                             <constraint firstItem="qSO-EO-sig" firstAttribute="top" secondItem="UNa-px-q30" secondAttribute="bottom" constant="10" id="Wm0-Gl-84Y"/>
                             <constraint firstItem="sz3-zO-tgY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Zv2-6k-Iae"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSO-EO-sig" secondAttribute="trailing" id="ane-gV-vRI"/>
@@ -90,7 +106,7 @@
                             <constraint firstItem="STi-O4-TIt" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="mtl-Ky-6sh"/>
                             <constraint firstItem="1Qm-l8-KQS" firstAttribute="top" secondItem="qSO-EO-sig" secondAttribute="bottom" constant="10" id="rXP-vQ-lWB"/>
                             <constraint firstItem="1Qm-l8-KQS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u8T-yJ-Nfu"/>
-                            <constraint firstItem="STi-O4-TIt" firstAttribute="top" secondItem="Nne-NA-Ggl" secondAttribute="bottom" constant="5" id="yV1-ar-FVd"/>
+                            <constraint firstItem="STi-O4-TIt" firstAttribute="top" secondItem="Nne-NA-Ggl" secondAttribute="bottom" id="yV1-ar-FVd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -99,6 +115,7 @@
                         <outlet property="lblAge" destination="sz3-zO-tgY" id="6Bi-cL-enw"/>
                         <outlet property="lblBirthDate" destination="1Qm-l8-KQS" id="1b7-hB-bfR"/>
                         <outlet property="lblCurrentDate" destination="qSO-EO-sig" id="2Tk-wc-cJe"/>
+                        <outlet property="lblReset" destination="RhO-T2-WHK" id="gLz-2V-Rlh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
