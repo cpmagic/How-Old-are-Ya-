@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
+        lblAge.adjustsFontSizeToFitWidth = true
     }
     
     func showCurrentDate() {
@@ -37,6 +38,9 @@ class ViewController: UIViewController {
         calculateBirthday()
     }
     func calculateBirthday() {
+        var txtYear = ""
+        var txtMonth = ""
+        var txtDay = ""
         //1 - get selected date from date picker
         let birthDate = self.datePicker.date
 
@@ -57,7 +61,33 @@ class ViewController: UIViewController {
         let ageMonths = components.month
         let ageDays = components.day
         //5 - display age in label
-        self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
+        
+        if ageYears == 1 {
+            txtYear = "Year"
+            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
+        }
+        else {
+            txtYear = "Years"
+            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
+        }
+        if ageMonths == 1 {
+            txtMonth = "Month"
+            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
+        }
+        else {
+            txtMonth = "Months"
+            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
+        }
+        if ageDays == 1 {
+            txtDay = "Day"
+            //self.lblAge.text = "\(ageYears!) \(txtYear), \(ageMonths!) months, \(ageDays!) days"
+        }
+        else {
+            txtDay = "Days"
+            //self.lblAge.text = "\(ageYears!) years, \(ageMonths!) months, \(ageDays!) days"
+        }
+        self.lblAge.text = "You are \(ageYears!) \(txtYear), \(ageMonths!) \(txtMonth), \(ageDays!) \(txtDay) Old"
+        
 
         //        var time = Time(seconds: 150.0)
         //        print("seconds: \(time.seconds)")

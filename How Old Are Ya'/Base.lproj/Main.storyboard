@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="STi-O4-TIt">
+                            <datePicker contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="STi-O4-TIt">
                                 <rect key="frame" x="0.0" y="497" width="375" height="170"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="wpn-cy-iBL"/>
@@ -54,10 +54,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sz3-zO-tgY">
-                                <rect key="frame" x="0.0" y="133" width="375" height="25"/>
+                                <rect key="frame" x="16" y="128" width="343" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="s9T-Mg-4tK"/>
-                                    <constraint firstAttribute="height" constant="25" id="ysU-pA-0B8"/>
+                                    <constraint firstAttribute="height" constant="25" id="XMp-yr-FC0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -76,16 +75,16 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="STi-O4-TIt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3WC-7R-WLJ"/>
-                            <constraint firstItem="sz3-zO-tgY" firstAttribute="top" secondItem="1Qm-l8-KQS" secondAttribute="bottom" constant="10" id="5Cf-en-cQf"/>
                             <constraint firstItem="UNa-px-q30" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="IEZ-fc-E4Q"/>
                             <constraint firstItem="Nne-NA-Ggl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="McO-ea-wmK"/>
                             <constraint firstItem="Nne-NA-Ggl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Pj5-aB-bg8"/>
                             <constraint firstItem="STi-O4-TIt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TEv-B5-H2q"/>
+                            <constraint firstItem="sz3-zO-tgY" firstAttribute="top" secondItem="1Qm-l8-KQS" secondAttribute="bottom" constant="5" id="TXC-nl-fxU"/>
                             <constraint firstItem="qSO-EO-sig" firstAttribute="top" secondItem="UNa-px-q30" secondAttribute="bottom" constant="10" id="Wm0-Gl-84Y"/>
+                            <constraint firstItem="sz3-zO-tgY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Zv2-6k-Iae"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qSO-EO-sig" secondAttribute="trailing" id="ane-gV-vRI"/>
-                            <constraint firstItem="sz3-zO-tgY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dr7-jd-9aX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sz3-zO-tgY" secondAttribute="trailing" constant="16" id="e92-TW-1eH"/>
                             <constraint firstItem="qSO-EO-sig" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fy8-bb-7Cj"/>
-                            <constraint firstItem="sz3-zO-tgY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="g4G-Fb-G1M"/>
                             <constraint firstItem="1Qm-l8-KQS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lHP-K9-4TG"/>
                             <constraint firstItem="UNa-px-q30" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mkW-xX-5YC"/>
                             <constraint firstItem="STi-O4-TIt" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="mtl-Ky-6sh"/>
@@ -104,7 +103,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="177" y="-68"/>
+            <point key="canvasLocation" x="176.80000000000001" y="-68.815592203898049"/>
         </scene>
     </scenes>
 </document>
