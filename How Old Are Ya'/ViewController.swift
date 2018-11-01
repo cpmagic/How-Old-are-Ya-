@@ -14,12 +14,12 @@ let year = calendar.component(.year, from: today)
 let month = calendar.component(.month, from: today)
 let day = calendar.component(.day, from: today)
 
-
 class ViewController: UIViewController {
     
     @IBOutlet weak var lblCurrentDate: UILabel!
     @IBOutlet weak var lblBirthDate: UILabel!
     @IBOutlet weak var lblAge: UILabel!
+    @IBOutlet weak var lblNextYear: UILabel!
     @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -47,6 +47,7 @@ class ViewController: UIViewController {
         lblBirthDate.text = "Your Birth Date: \(dateValue)"
         lblReset.isHidden = false
         calculateBirthday()
+        calulateNext()
     }
     func calculateBirthday() {
         var txtYear = ""
@@ -91,10 +92,39 @@ class ViewController: UIViewController {
         }
         self.lblAge.text = "You are \(ageYears!) \(txtYear), \(ageMonths!) \(txtMonth), \(ageDays!) \(txtDay) Old"
     }
+    
+    func calulateNext() {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy"
+//        let birthYear: String = dateFormatter.string(from: self.datePicker.date)
+//        dateFormatter.dateFormat = "MM"
+//        let birthMonth: String = dateFormatter.string(from: self.datePicker.date)
+//        dateFormatter.dateFormat = "dd"
+//        let birthDay: String = dateFormatter.string(from: self.datePicker.date)
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day,.month,.year], from: self.datePicker.date)
+        let day = components.day
+        let month = components.month
+        let year = components.year
+//            let birthDay = String(day)
+//            let monthString = String(month)
+//            let yearString = String(year)
+        
+        let yearsToAdd = 1
+        let currentDate = Date()
+        
+        var dateComponent = DateComponents()
+                dateComponent.year = yearsToAdd
+        
+        //let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
+        lblNextYear.text = "\(day!) \(today)"
+    }
+    
     @IBAction func btnReset(_ sender: UIButton) {
         datePicker.date = today;
         lblBirthDate.text = ""
         lblAge.text = ""
+        lblNextYear.text = ""
         lblReset.isHidden = true
     }
 }
