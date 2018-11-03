@@ -19,10 +19,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblCurrentDate: UILabel!
     @IBOutlet weak var lblBirthDate: UILabel!
     @IBOutlet weak var lblAge: UILabel!
+    @IBOutlet weak var lblDaysOld: UILabel!
+    @IBOutlet weak var lblMonthsOld: UILabel!
     @IBOutlet weak var lblNextYear: UILabel!
     @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +34,13 @@ class ViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
         lblAge.adjustsFontSizeToFitWidth = true
     }
-    
     func showCurrentDate() {
-        lblCurrentDate.text = "Today is \(month)/\(day)/\(year)"
-        lblCurrentDate.adjustsFontSizeToFitWidth = true
+        lblCurrentDate.textColor = UIColor.red
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = DateFormatter.Style.full
+        let convertedDate = dateFormatter.string(from: today)
+        lblCurrentDate.text = convertedDate
     }
-    
     @objc func datePickerValueChanged (datePicker: UIDatePicker) {
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.medium
@@ -47,7 +49,8 @@ class ViewController: UIViewController {
         lblBirthDate.text = "Your Birth Date: \(dateValue)"
         lblReset.isHidden = false
         calculateBirthday()
-        calulateNext()
+        calculateDays()
+        calculateMonths()
     }
     func calculateBirthday() {
         var txtYear = ""
@@ -58,7 +61,7 @@ class ViewController: UIViewController {
         //2 Set Alert
         if birthDate >= today
         {
-            let alertView = UIAlertController(title: "Error", message: "Please enter a valid date", preferredStyle: .alert)
+            let alertView = UIAlertController(title: "Error", message: "Please select a date less than today!", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertView.addAction(action)
             self.present(alertView, animated: false, completion: nil)
@@ -92,38 +95,53 @@ class ViewController: UIViewController {
         }
         self.lblAge.text = "You are \(ageYears!) \(txtYear), \(ageMonths!) \(txtMonth), \(ageDays!) \(txtDay) Old"
     }
-    
-    func calulateNext() {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy"
-//        let birthYear: String = dateFormatter.string(from: self.datePicker.date)
-//        dateFormatter.dateFormat = "MM"
-//        let birthMonth: String = dateFormatter.string(from: self.datePicker.date)
-//        dateFormatter.dateFormat = "dd"
-//        let birthDay: String = dateFormatter.string(from: self.datePicker.date)
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.day,.month,.year], from: self.datePicker.date)
-        let day = components.day
-        let month = components.month
-        let year = components.year
-//            let birthDay = String(day)
-//            let monthString = String(month)
-//            let yearString = String(year)
-        
-        let yearsToAdd = 1
-        let currentDate = Date()
-        
-        var dateComponent = DateComponents()
-                dateComponent.year = yearsToAdd
-        
-        //let futureDate = Calendar.current.date(byAdding: dateComponent, to: currentDate)
-        lblNextYear.text = "\(day!) \(today)"
+    func calculateDays() {
+        let difference = Calendar.current.dateComponents([.day], from: datePicker.date, to: today).day
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        let result = formatter.string(from: NSNumber(value: difference!))
+        if difference == 0 {
+            lblDaysOld.text = "Days"
+        } else if difference == 1 {
+            lblDaysOld.text = "You are \(String(describing: result!)) Day Old"
+        } else {
+            lblDaysOld.text = "You are \(String(describing: result!)) Days Old"
+        }
     }
+    func calculateMonths() {
+        let difference = Calendar.current.dateComponents([.month], from: datePicker.date, to: today).month
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        let result = formatter.string(from: NSNumber(value: difference!))
+        if difference == 0 {
+            lblMonthsOld.text = "Months"
+        } else if difference == 1 {
+            lblMonthsOld.text = "You are \(String(describing: result!)) Month Old"
+        } else {
+            lblMonthsOld.text = "You are \(String(describing: result!)) Months Old"
+        }
+    }
+    
+//    func calulateNext() {
+//        let diffInDays = Calendar.current.dateComponents([.day], from: datePicker.date, to: today).day
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .decimal
+//        formatter.maximumFractionDigits = 0
+//
+//        lblNextYear.text = "\(String(describing: diffInDays!))"
+//
+//        //lblNextYear.text = dateFormatter.string(from: datePicker.date)
+//        //lblNextYear.text = computeNewDate(from: datePicker.date, to: Date())
+//    }
     
     @IBAction func btnReset(_ sender: UIButton) {
         datePicker.date = today;
         lblBirthDate.text = ""
         lblAge.text = ""
+        lblDaysOld.text = ""
+        lblMonthsOld.text = ""
         lblNextYear.text = ""
         lblReset.isHidden = true
     }
