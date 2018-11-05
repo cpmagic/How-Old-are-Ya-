@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblWeeksOld: UILabel!
     @IBOutlet weak var lblMonthsOld: UILabel!
     @IBOutlet weak var lblYearsOld: UILabel!
-    @IBOutlet weak var lblNextYear: UILabel!
+    
     @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -38,13 +38,10 @@ class ViewController: UIViewController {
         lblWeeksOld.isHidden = true
         lblMonthsOld.isHidden = true
         lblYearsOld.isHidden = true
-
         lblReset.isHidden = true
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
         lblAge.adjustsFontSizeToFitWidth = true
-//        lblHoursOld.isHidden = true
-//        lblMinutesOld.isHidden = true
     }
     func showCurrentDate() {
         lblCurrentDate.textColor = UIColor.red
@@ -54,7 +51,12 @@ class ViewController: UIViewController {
         lblCurrentDate.text = convertedDate
     }
     @objc func datePickerValueChanged (datePicker: UIDatePicker) {
-        lblYouAre.isHidden = false
+        if datePicker.date == today {
+            lblYouAre.isHidden = true
+        } else {
+            lblYouAre.isHidden = false
+        }
+        
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.full
         dateformatter.timeStyle = DateFormatter.Style.none
@@ -68,18 +70,12 @@ class ViewController: UIViewController {
         calculateMonths()
         calculateWeeks()
         calculateDays()
-//        calculateHours()
-//        calculateMinutes()
-//        lblHoursOld.isHidden = true
-//        lblMinutesOld.isHidden = true
     }
     func calculateBirthday() {
         var txtYear = ""
         var txtMonth = ""
         var txtDay = ""
-        //1 - get selected date from date picker
         let birthDate = self.datePicker.date
-        //2 Set Alert
         if birthDate >= today
         {
             let alertView = UIAlertController(title: "Error", message: "Please select a date less than today!", preferredStyle: .alert)
@@ -88,9 +84,7 @@ class ViewController: UIViewController {
             self.present(alertView, animated: false, completion: nil)
             return
         }
-        //3 - create an instance of the user's current calendar
         let calendar = Calendar.current
-        //4 - use calendar to get difference between two dates
         let components = calendar.dateComponents([.year, .month, .day], from: birthDate, to: today)
         let ageYears = components.year
         let ageMonths = components.month
@@ -126,10 +120,10 @@ class ViewController: UIViewController {
             lblYearsOld.isHidden = true
         } else if difference == 1 {
             lblYearsOld.isHidden = false
-            lblYearsOld.text = "\(String(describing: result!)) Year Old"
+            lblYearsOld.text = "\t\(String(describing: result!)) Year Old"
         } else {
             lblYearsOld.isHidden = false
-            lblYearsOld.text = "\(String(describing: result!)) Years Old"
+            lblYearsOld.text = "\t\(String(describing: result!)) Years Old"
         }
     }
     func calculateMonths() {
@@ -142,10 +136,10 @@ class ViewController: UIViewController {
             lblMonthsOld.isHidden = true
         } else if difference == 1 {
             lblMonthsOld.isHidden = false
-            lblMonthsOld.text = "\(String(describing: result!)) Month Old"
+            lblMonthsOld.text = "\t\(String(describing: result!)) Month Old"
         } else {
             lblMonthsOld.isHidden = false
-            lblMonthsOld.text = "\(String(describing: result!)) Months Old"
+            lblMonthsOld.text = "\t\(String(describing: result!)) Months Old"
         }
     }
     func calculateWeeks() {
@@ -158,10 +152,10 @@ class ViewController: UIViewController {
             lblWeeksOld.isHidden = true
         } else if difference == 1 {
             lblWeeksOld.isHidden = false
-            lblWeeksOld.text = "About \(String(describing: result!)) Week Old"
+            lblWeeksOld.text = "\t\(String(describing: result!)) Week Old"
         } else {
             lblWeeksOld.isHidden = false
-            lblWeeksOld.text = "About \(String(describing: result!)) Weeks Old"
+            lblWeeksOld.text = "\t\(String(describing: result!)) Weeks Old"
         }
     }
     func calculateDays() {
@@ -174,54 +168,12 @@ class ViewController: UIViewController {
             lblDaysOld.isHidden = true
         } else if difference == 1 {
             lblDaysOld.isHidden = false
-            lblDaysOld.text = "\(String(describing: result!)) Day Old"
+            lblDaysOld.text = "\t\(String(describing: result!)) Day Old"
         } else {
             lblDaysOld.isHidden = false
-            lblDaysOld.text = "\(String(describing: result!)) Days Old"
+            lblDaysOld.text = "\t\(String(describing: result!)) Days Old"
         }
     }
-//    func calculateHours() {
-//        let difference = Calendar.current.dateComponents([.hour], from: datePicker.date, to: today).hour
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.maximumFractionDigits = 0
-//        let result = formatter.string(from: NSNumber(value: difference!))
-//        if difference == 0 {
-//            lblHoursOld.text = "Hours"
-//        } else if difference == 1 {
-//            lblHoursOld.text = "You are \(String(describing: result!)) Hour Old"
-//        } else {
-//            lblHoursOld.text = "You are \(String(describing: result!)) Hours Old"
-//        }
-//    }
-//    func calculateMinutes() {
-//        let difference = Calendar.current.dateComponents([.hour], from: datePicker.date, to: today).hour
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.maximumFractionDigits = 0
-//        let result = formatter.string(from: NSNumber(value: difference!))
-//        if difference == 0 {
-//            lblMinutesOld.text = "Minutes"
-//        } else if difference == 1 {
-//            lblMinutesOld.text = "You are \(String(describing: result!)) Minute Old"
-//        } else {
-//            lblMinutesOld.text = "You are \(String(describing: result!)) Minutes Old"
-//        }
-//    }
-    
-    
-//    func calulateNext() {
-//        let diffInDays = Calendar.current.dateComponents([.day], from: datePicker.date, to: today).day
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .decimal
-//        formatter.maximumFractionDigits = 0
-//
-//        lblNextYear.text = "\(String(describing: diffInDays!))"
-//
-//        //lblNextYear.text = dateFormatter.string(from: datePicker.date)
-//        //lblNextYear.text = computeNewDate(from: datePicker.date, to: Date())
-//    }
-    
     @IBAction func btnReset(_ sender: UIButton) {
         datePicker.date = today;
         lblBirthDate.text = ""
@@ -231,10 +183,6 @@ class ViewController: UIViewController {
         lblWeeksOld.isHidden = true
         lblMonthsOld.isHidden = true
         lblYearsOld.isHidden = true
-//        lblHoursOld.isHidden = true
-//        lblMinutesOld.isHidden = true
-//        lblNextYear.text = ""
-//        lblReset.isHidden = true
     }
 }
 
