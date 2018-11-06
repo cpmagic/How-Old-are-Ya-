@@ -24,8 +24,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblWeeksOld: UILabel!
     @IBOutlet weak var lblMonthsOld: UILabel!
     @IBOutlet weak var lblYearsOld: UILabel!
-    
+    @IBOutlet weak var lblNextYear: UILabel!
     @IBOutlet weak var lblReset: UIButton!
+    @IBOutlet weak var lblSelectBirthDate: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     override func viewDidLoad() {
@@ -38,6 +39,7 @@ class ViewController: UIViewController {
         lblWeeksOld.isHidden = true
         lblMonthsOld.isHidden = true
         lblYearsOld.isHidden = true
+        lblNextYear.text = ""
         lblReset.isHidden = true
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
@@ -56,7 +58,6 @@ class ViewController: UIViewController {
         } else {
             lblYouAre.isHidden = false
         }
-        
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.full
         dateformatter.timeStyle = DateFormatter.Style.none
@@ -64,12 +65,14 @@ class ViewController: UIViewController {
         lblBirthDate.text = " Birth Date: \(dateValue)  "
         lblBirthDate.adjustsFontSizeToFitWidth = true
         lblAge.adjustsFontSizeToFitWidth = true
+        lblNextYear.adjustsFontSizeToFitWidth = true
         lblReset.isHidden = false
         calculateBirthday()
         calculateYears()
         calculateMonths()
         calculateWeeks()
         calculateDays()
+        calculateNextYear()
     }
     func calculateBirthday() {
         var txtYear = ""
@@ -89,7 +92,6 @@ class ViewController: UIViewController {
         let ageYears = components.year
         let ageMonths = components.month
         let ageDays = components.day
-        //5 - display age in label
         if ageYears == 1 {
             txtYear = "Year"
         }
@@ -174,6 +176,44 @@ class ViewController: UIViewController {
             lblDaysOld.text = "\t\(String(describing: result!)) Days Old"
         }
     }
+    func calculateNextYear() {
+            var txtYear = ""
+            var txtMonth = ""
+            var txtDay = ""
+            let birthDate = self.datePicker.date
+            if birthDate >= today
+            {
+                let alertView = UIAlertController(title: "Error", message: "Please select a date less than today!", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                alertView.addAction(action)
+                self.present(alertView, animated: false, completion: nil)
+                return
+            }
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: today, to: datePicker.date)
+            let ageYears = components.year
+            let ageMonths = components.month
+            let ageDays = components.day
+            if ageYears == -1 {
+                txtYear = "Year"
+            }
+            else {
+                txtYear = "Years"
+            }
+            if ageMonths == -1 {
+                txtMonth = "Month"
+            }
+            else {
+                txtMonth = "Months"
+            }
+            if ageDays == -1 {
+                txtDay = "Day"
+            }
+            else {
+                txtDay = "Days"
+            }
+        self.lblNextYear.text = "\(abs(ageYears!)) \(txtYear), \(abs(ageMonths!)) \(txtMonth), \(abs(ageDays!)) \(txtDay) until birthday"
+    }
     @IBAction func btnReset(_ sender: UIButton) {
         datePicker.date = today;
         lblBirthDate.text = ""
@@ -183,6 +223,7 @@ class ViewController: UIViewController {
         lblWeeksOld.isHidden = true
         lblMonthsOld.isHidden = true
         lblYearsOld.isHidden = true
+        lblNextYear.isHidden = true
     }
 }
 
