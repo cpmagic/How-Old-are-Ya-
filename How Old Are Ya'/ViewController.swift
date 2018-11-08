@@ -27,6 +27,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var lblSelectBirthDate: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var imgCake: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,7 @@ class ViewController: UIViewController {
         lblYearsOld.isHidden = true
         lblReset.isHidden = true
         lblSelectBirthDate.isHidden = false
+        imgCake.isHidden = false
     }
     func showCurrentDate() {
         let dateFormatter = DateFormatter()
@@ -60,6 +62,7 @@ class ViewController: UIViewController {
         } else {
             lblYouAre.isHidden = false
         }
+        imgCake.isHidden = true
         lblSelectBirthDate.isHidden = true
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.full
