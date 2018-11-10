@@ -13,6 +13,11 @@ let calendar = Calendar.current
 let year = calendar.component(.year, from: today)
 let month = calendar.component(.month, from: today)
 let day = calendar.component(.day, from: today)
+let imgCake: UIImageView = {
+    let theImageView = UIImageView()
+    theImageView.image = UIImage(named: "cake.jpg")
+    theImageView.translatesAutoresizingMaskIntoConstraints = false //You need to call this property so the image is added to your view
+    return theImageView }()
 
 class ViewController: UIViewController {
     
@@ -27,18 +32,22 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblReset: UIButton!
     @IBOutlet weak var lblSelectBirthDate: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var imgCake: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        datePicker.maximumDate = Date()
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
-        lblAge.adjustsFontSizeToFitWidth = true
+        view.addSubview(imgCake) //This add it the view controller without constraints
+        someImageViewConstraints()
+    }
+    func someImageViewConstraints() {
+        imgCake.widthAnchor.constraint(equalToConstant: 203).isActive = true
+        imgCake.heightAnchor.constraint(equalToConstant: 249).isActive = true
+        imgCake.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imgCake.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
     }
     func updateUI() {
-        datePicker.date = today;
         lblBirthDate.isHidden = true
         lblAge.isHidden = true
         lblYouAre.isHidden = true
@@ -49,6 +58,7 @@ class ViewController: UIViewController {
         lblReset.isHidden = true
         lblSelectBirthDate.isHidden = false
         imgCake.isHidden = false
+        datePicker.date = today
     }
     func showCurrentDate() {
         let dateFormatter = DateFormatter()
@@ -57,11 +67,10 @@ class ViewController: UIViewController {
         lblCurrentDate.text = convertedDate
     }
     @objc func datePickerValueChanged (datePicker: UIDatePicker) {
-        if datePicker.date == today {
-            lblYouAre.isHidden = true
+        if datePicker.date >= today {
+            updateUI()
         } else {
-            lblYouAre.isHidden = false
-        }
+        lblYouAre.isHidden = false
         imgCake.isHidden = true
         lblSelectBirthDate.isHidden = true
         let dateformatter = DateFormatter()
@@ -80,6 +89,7 @@ class ViewController: UIViewController {
         calculateMonths()
         calculateWeeks()
         calculateDays()
+        }
     }
     func calculateBirthday() {
         var txtYear = ""
