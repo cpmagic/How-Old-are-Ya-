@@ -39,13 +39,7 @@ class ViewController: UIViewController {
         showCurrentDate()
         datePicker.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
         view.addSubview(imgCake) //This add it the view controller without constraints
-        someImageViewConstraints()
-    }
-    func someImageViewConstraints() {
-        imgCake.widthAnchor.constraint(equalToConstant: 203).isActive = true
-        imgCake.heightAnchor.constraint(equalToConstant: 249).isActive = true
-        imgCake.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        imgCake.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
+        imgCakeConstraints()
     }
     func updateUI() {
         lblBirthDate.isHidden = true
@@ -193,7 +187,20 @@ class ViewController: UIViewController {
             lblDaysOld.text = "\t\(String(describing: result!)) Days Old"
         }
     }
-//    func calculateNextYear() {
+    @IBAction func btnReset(_ sender: UIButton) {
+        updateUI()
+    }
+    
+    //MARK: Layout Constraints
+    func imgCakeConstraints() {
+        imgCake.widthAnchor.constraint(equalToConstant: 203).isActive = true
+        imgCake.heightAnchor.constraint(equalToConstant: 249).isActive = true
+        imgCake.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        imgCake.topAnchor.constraint(equalTo: view.topAnchor, constant: +110).isActive = true
+//      imgCake.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50).isActive = true
+    }
+}
+//  func calculateNextYear() {
 //            var txtYear = ""
 //            var txtMonth = ""
 //            var txtDay = ""
@@ -231,8 +238,3 @@ class ViewController: UIViewController {
 //            }
 //        self.lblNextYear.text = "\(abs(ageYears!)) \(txtYear), \(abs(ageMonths!)) \(txtMonth), \(abs(ageDays!)) \(txtDay) until birthday"
 //    }
-    @IBAction func btnReset(_ sender: UIButton) {
-        updateUI()
-    }
-}
-
