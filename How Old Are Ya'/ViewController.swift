@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblBirthDate: UILabel!
     @IBOutlet weak var lblAge: UILabel!
     @IBOutlet weak var lblYouAre: UILabel!
+    @IBOutlet weak var lblMinutesOld: UILabel!
+    @IBOutlet weak var lblHoursOld: UILabel!
     @IBOutlet weak var lblDaysOld: UILabel!
     @IBOutlet weak var lblWeeksOld: UILabel!
     @IBOutlet weak var lblMonthsOld: UILabel!
@@ -45,6 +47,8 @@ class ViewController: UIViewController {
         lblBirthDate.isHidden = true
         lblAge.isHidden = true
         lblYouAre.isHidden = true
+        lblMinutesOld.isHidden = true
+        lblHoursOld.isHidden = true
         lblDaysOld.isHidden = true
         lblWeeksOld.isHidden = true
         lblMonthsOld.isHidden = true
@@ -83,6 +87,8 @@ class ViewController: UIViewController {
         calculateMonths()
         calculateWeeks()
         calculateDays()
+        calculateHours()
+        calculateMinutes()
         }
     }
     func calculateBirthday() {
@@ -185,6 +191,38 @@ class ViewController: UIViewController {
         } else {
             lblDaysOld.isHidden = false
             lblDaysOld.text = "\t\(String(describing: result!)) Days Old"
+        }
+    }
+    func calculateHours() {
+        let difference = Float(Calendar.current.dateComponents([.day], from: datePicker.date, to: today).day! * 24)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 1
+        let result = formatter.string(from: NSNumber(value: difference))
+        if difference == 0 {
+            lblHoursOld.isHidden = true
+        } else if difference == 1 {
+            lblHoursOld.isHidden = false
+            lblHoursOld.text = "\t\(String(describing: result!)) Hours Old"
+        } else {
+            lblHoursOld.isHidden = false
+            lblHoursOld.text = "\t\(String(describing: result!)) Hours Old"
+        }
+    }
+    func calculateMinutes() {
+        let difference = Float(Calendar.current.dateComponents([.day], from: datePicker.date, to: today).day! * 1440)
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 1
+        let result = formatter.string(from: NSNumber(value: difference))
+        if difference == 0 {
+            lblMinutesOld.isHidden = true
+        } else if difference == 1 {
+            lblMinutesOld.isHidden = false
+            lblMinutesOld.text = "\t\(String(describing: result!)) Minutes Old"
+        } else {
+            lblMinutesOld.isHidden = false
+            lblMinutesOld.text = "\t\(String(describing: result!)) Minutes Old"
         }
     }
     @IBAction func btnReset(_ sender: UIButton) {
